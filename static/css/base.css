@@ -1,0 +1,89 @@
+body{
+	height: 85%;
+	width: inherit;
+}
+
+.header {
+	box-shadow: 0 0 10px #000;
+	border-radius: 10px;
+	margin: 0 auto;
+	width: 100%;
+	float: right;
+	text-align: center;
+	background: #a4b357; /* Old browsers */
+	background: -moz-linear-gradient(top,  #a4b357 18%, #75890c 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(18%,#a4b357), color-stop(100%,#75890c)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #a4b357 18%,#75890c 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #a4b357 18%,#75890c 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #a4b357 18%,#75890c 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #a4b357 18%,#75890c 100%); /* W3C */
+}
+
+div.floating-menu {
+	position: fixed;
+	background: #fff4c8;
+	border: 1px solid #ffcc00;
+	border-radius: 10px;
+	width: 14%;
+	z-index: 100;
+	top: 10%;
+	margin: 0 auto;
+}
+div.floating-menu a, div.floating-menu h3 {
+	display:block;
+	margin:0 0.5em;
+}
+
+.container {
+	box-shadow: 0 0 10px #000;
+	border-radius: 10px;
+	margin: 0 auto;
+	width: 85%;
+	height: 100%;
+	float: right;
+	margin-top: 5px;
+}
+
+a {
+	text-align: center;
+}
+
+/*#buttonDialog:hover, #buttonDialog:active{
+	font-style: red;
+	font-weight: bold;
+	border-radius: 10px;
+
+}
+*/
+/*.paging{cursor: pointer; 
+	background-color: transparent;border:1px solid #999;
+	text-decoration:none;
+	color:#000;
+	font-weight:bold;
+}*/
+
+input[type="button"]{
+	font-style: red;
+	font-weight: bold;
+	border-radius: 10px;
+	width: 95%;
+}
+
+input[type="button"]:hover{
+	border:1px solid #FF0000;
+	color:#FF0000;
+	border-radius: 10px;
+	width: 95%;
+}
+
+input[type="submit"]{
+	font-style: red;
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+input[type="submit"]:hover{
+	border:1px solid #FF0000;
+	color:#FF0000;
+	border-radius: 10px;
+}

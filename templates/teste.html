@@ -1,0 +1,129 @@
+<html>
+<head>
+	<!-- <meta charset="UTF-8"> -->
+
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" >
+	<title>Geolocalization</title>
+
+	<!-- jQuery 2.0.2 -->
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+	<!-- jQuery 1.11.0 -->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+
+	<!-- jQueryUI 1.10.4 -->
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap-3.1.1-dist/css/bootstrap.css">
+	<script src="../static/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+
+	<!-- Map Icons -->
+	<link rel="stylesheet" type="text/css" href="../static/css/map.css">
+	<script src="../static/js/map-icons.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/css/map-icons.css" />
+
+	<!-- Social Icons -->
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap-social-gh-pages/bootstrap-social.css">
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap-social-gh-pages/bootstrap-social.less">
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap-social-gh-pages/assets/css/font-awesome.css">
+
+	<!-- Google Maps -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+	<link rel="stylesheet" type="text/css" href="../static/checkList.css" />
+	<script src="../static/jquery-1.8.0.min.js"></script>
+	<script src="../static/jquery-ui-1.8.23.custom.min.js"></script>
+	<script src="../static/jquery.ui.checkList.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="../static/ui-lightness/jquery-ui-1.8.23.custom.css" />
+
+	<!-- // <script src="/static/js/region-analysis.js"></script> -->
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+	
+	$(function() {
+		
+	});
+
+
+	//Tables Values
+	var counter = 0;
+	counter = $('#moreFieldsTable tr').length - 2;
+
+	$("#addrow").on("click", function () {
+		
+		var newRow = $("<tr>");
+		var cols = "";
+		cols += '<td><input type="checkbox" name="check' + counter + '" value="teste' + counter + '"></td>'
+		cols += '<td><input type="text" name="name' + counter + '" placeholder="Digite o nome do campo" /></td>';
+		cols += '<td><input type="text" name="price' + counter + '" placeholder="Digite um valor para análise"/></td>';
+		cols += '<td><select class="form-control"><option value="Centro" selected>Centro</option><option value="Leste">Leste</option><option value="Norte">Norte</option><option value="Oeste">Oeste</option><option value="Sudeste">Sudeste</option><option value="Sul">Sul</option></select></td>';
+		cols += '<td><input type="button" id="ibtnDel"  value="Delete"></td>';
+		newRow.append(cols);
+		
+		$("#moreFieldsTable").append(newRow);
+		counter++;
+	});
+
+	var lista = []
+
+	$("#moreFieldsTable").on("change", function (event) {
+		lista = [];
+		var MyRows = $('#moreFieldsTable').find('tbody').find('tr');
+
+		for (var i = 0; i < MyRows.length; i++) {
+			if ($(MyRows[i]).find('td:eq(0)').children().is(':checked')){
+				var item = {
+					'field' : $(MyRows[i]).find('td:eq(1)').children().val(),
+					'value' : $(MyRows[i]).find('td:eq(2)').children().val(),
+					'region': $(MyRows[i]).find('td:eq(3)').children().find(":selected").val()
+				}
+				lista.push(item);
+			}
+		}
+
+		$('#moreFieldsInput').val(JSON.stringify(lista));
+	});
+
+	$("#moreFieldsTable").on("click", "#ibtnDel", function (event) {
+		$(this).closest("tr").remove();
+		counter --;
+	});
+
+
+});
+</script>
+
+
+<table id="moreFieldsTable" class="table">
+	<thead><tr><td></td><td>Field</td><td>Value</td><td>Region</td></tr></thead>
+	<tbody>
+		<tr>
+			<td><input type="checkbox" name="check1" value="teste"></td>
+			<td><input type="text" name="name" placeholder="Digite o nome do campo" /></td>
+			<td><input type="text" name="price1" placeholder="Digite um valor para análise"/></td>
+			<td><select class="form-control"><option value="Centro" selected>Centro</option><option value="Leste">Leste</option><option value="Norte">Norte</option><option value="Oeste">Oeste</option><option value="Sudeste">Sudeste</option><option value="Sul">Sul</option></select></td>
+			<td><a class="deleteRow"></a></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr><td colspan="3" style="text-align: right;"><input type="button" id="addrow" value="Add Row" /></td></tr>
+	</tfoot>
+</table>
+
+<input type="text" class="form-control" id="moreFieldsInput" name="moreFields" placeholder="Mais campos" style="width:98%;">
+
+
+
+
+</body>
+</html>
+

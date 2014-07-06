@@ -1,0 +1,343 @@
+<html>
+<head>
+	<!-- <meta charset="UTF-8"> -->
+
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" >
+	<title>Geolocalization</title>
+
+	<!-- jQuery 2.0.2 -->
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+	<!-- jQuery 1.11.0 -->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+
+	<!-- jQueryUI 1.10.4 -->
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap-3.1.1-dist/css/bootstrap.css">
+	<script src="/static/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+
+	<!-- Map Icons -->
+	<link rel="stylesheet" type="text/css" href="/static/css/map.css">
+	<script src="/static/js/map-icons.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/map-icons.css" />
+
+	<!-- Social Icons -->
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap-social-gh-pages/bootstrap-social.css">
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap-social-gh-pages/bootstrap-social.less">
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap-social-gh-pages/assets/css/font-awesome.css">
+
+	<!-- Google Maps -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+	<link rel="stylesheet" type="text/css" href="/static/checkList.css" />
+	<script src="/static/jquery-1.8.0.min.js"></script>
+	<script src="/static/jquery-ui-1.8.23.custom.min.js"></script>
+	<script src="/static/jquery.ui.checkList.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/static/ui-lightness/jquery-ui-1.8.23.custom.css" />
+
+</head>
+<body>
+	
+	<!-- MENU -->
+	<div class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<!-- 	 -->
+			<a href="/" class="navbar-brand">Análise Geoespacial de ocorrência de Doenças Oncológicas no Municipio de São José dos Campos</a>
+
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/">Home</a></li>
+					<li><a href="#form" data-toggle="modal">Form</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Regions<b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/region" data-toggle="modal">New Region</a></li>
+							<li><a href="/maps_regions" data-toggle="modal">Regions</a></li>
+							<li><a href="#form_region" data-toggle="modal">Analysis-Regions</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysis<b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#form_analysis_db" data-toggle="modal">Data</a></li>
+							<li><a href="/filter" data-toggle="modal">Analysis by Filter</a></li>
+						</ul>
+					</li>
+					<li><a href="#form_upload_file" data-toggle="modal">Upload Files</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Lists<b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/listAllHealths" data-toggle="modal">Healths</a></li>
+							<li><a href="/listAllDocuments" data-toggle="modal">Documents</a></li>
+							<li><a href="/listAllCIDs" data-toggle="modal">Neoplasms</a></li>
+							<li><a href="/listAllPlaces" data-toggle="modal">Places</a></li>
+							<!-- <li><a href="#">Teste</a></li> -->
+						</ul>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+		//generate random CEPs
+		function getRandomInt (min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+		function zeroPad(num, places) {
+			var zero = places - num.toString().length + 1;
+			return Array(+(zero > 0 && zero)).join("0") + num;
+		}
+
+		//ceps SJC --> 12200-001 a 12248-999
+		function generateCeps(){
+			var max = parseInt($("#quantity").val());
+			var i = 0;
+			var lista = [];
+			var ceps = "";
+			var init = $("#cepInit").val().split('-');
+			var end = $("#cepEnd").val().split('-');
+			while(i < max){
+				var cep = new String(getRandomInt(parseInt(init[0]), parseInt(end[0])));
+				cep += "-" + new String(zeroPad(getRandomInt(parseInt(init[1]), parseInt(end[1])),3));
+				if(lista.indexOf(cep) == -1){
+					lista.push(cep);
+					i++;
+				}
+			}
+			lista.sort();
+			for (var i=0;i<lista.length;i++){ 
+				ceps += lista[i] + ";";
+			}
+			$('#ceps').val(ceps.slice(0,-1));
+		}
+	</script>
+
+	<!-- FORM in Form -->
+	<div class="modal fade" id="form" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>Form</h4>
+				</div>
+				<div class="modal-body">
+
+					<form action="/coords/loc" method="post" id="form_coords" class="form-horizontal">
+
+						<input type='hidden' name='csrfmiddlewaretoken' value='{{csrf_token}}'>
+
+						<div class="form-group">
+							<div class="row">
+								<label class="col-sm-2 control-label">Pais</label>
+								<div class="col-xs-4">
+									<input type="text" class="form-control" name="country" placeholder="Nome ou Sigla" value="Brasil">
+								</div>
+							</div>
+							
+							<div class="row">
+							<label class="col-sm-2 control-label">Estado</label>
+								<div class="col-xs-4">
+									<input type="text" class="form-control" name="state" placeholder="Nome ou Sigla" value="SP">
+								</div>
+							</div>
+
+							<div class="row">
+								<label class="col-sm-2 control-label">Cidade</label>
+								<div class="col-xs-6">
+									<input type="text" class="form-control" name="city" placeholder="Nome completo da cidade" value="São José dos Campos">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="row">
+								<label class="col-sm-2 control-label">Clusters</label>
+								<div class="col-sm-3">
+									<input type="number" class="form-control" name="num_clusters" placeholder="Digite a quantidade" value="2">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="row">
+								<label class="col-sm-2 control-label">CEPs</label>
+								<div class="col-xs-3">
+									<input type="number" class="form-control" id="quantity" placeholder="Quantidade de CEPs" value="10" min="1" max="1000000">
+								</div>
+							</div>
+
+							<div class="row">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-xs-3">
+									<input type="text" class="form-control col-sm-2" id="cepInit" placeholder="CEP Inicial (xxxxx-xxx)" value="12200-001">
+								</div>
+								<div class="col-xs-3">
+									<input type="text" class="form-control col-sm-2" id="cepEnd" placeholder="CEP Final (xxxxx-xxx)" value="12248-999">
+								</div>
+								<div class="col-xs-3">
+									<button type="button" onclick="generateCeps()" class="btn btn-warning pull-left">Gera CEPs</button>
+								</div>
+							</div>
+
+							<div class="row">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-xs-8">
+									<textarea class="form-control" id="ceps" name="ceps" rows="4" placeholder="Digite os CEPs separados por ';' ou click no botão para Gerar CEPs"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-xs-offset-3 col-xs-9">
+									<input type="submit" class="btn btn-primary" value="Submit">
+									<input type="reset" class="btn btn-default" value="Reset">
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-info" data-dismiss="modal">Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- FORM in Analysis -->
+	<div class="modal fade" id="form_analysis_db" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>Analysis Database</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/analysis" method="post" id="form_analysis_db" class="form-horizontal">
+						<input type='hidden' name='csrfmiddlewaretoken' value='{{csrf_token}}'>
+
+						<div class="form-group">
+							<div class="row">
+								<label class="col-sm-2 control-label">Centroids</label>
+								<div class="col-sm-2">
+									<input type="number" class="form-control" name="num_centroids" placeholder="Digite a quantidade" value="2">
+								</div>
+								<label class="col-sm-2 control-label">Points</label>
+								<div class="col-sm-2">
+									<input type="number" class="form-control" name="num_points" placeholder="Quantidade de pontos" value="100" min="1" max="2000">
+								</div>
+								<div class="col-sm-2">
+									<input type="submit" class="btn btn-primary" value="Submit">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-info" data-dismiss="modal">Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- FORM in Analysis-Region -->
+	<div class="modal fade" id="form_region" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>Analysis per Region</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/maps_regions" method="post" id="form_analysis_db" class="form-horizontal">
+						<input type='hidden' name='csrfmiddlewaretoken' value='{{csrf_token}}'>
+
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-1">
+									<label class="control-label">Points</label>	
+								</div>
+								<div class="col-md-4">
+									<input type="number" class="form-control" name="num_points_regions" placeholder="Quantidade de pontos" value="100" min="1" max="2000">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							{% block tableMoreInputs %}{% endblock %}
+							<input type="hidden" class="form-control" id="moreFieldsInput" name="moreFields" placeholder="Mais campos" style="width:98%;">
+						</div>
+
+						<div class="form-group">
+							<input type="submit" class="btn btn-primary" value="Submit">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-info" data-dismiss="modal">Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- FORM in Menu to Upload Files -->
+	<div class="modal fade" id="form_upload_file" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>Upload Files</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/upload_files" method="post" id="form_upload_file" enctype="multipart/form-data"> {% csrf_token %}
+						{{ form }}
+						<div class="form-group">
+							<label for="exampleInputFile">File input</label>
+							<input type="file" id="exampleInputFile" id="upload_file" name="upload_file">
+						</div>
+						<div class="form-group">
+							<input type="submit" class="btn btn-primary" id="upload-btn" value="Upload">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-info" data-dismiss="modal">Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- PAGE -->
+	<div class="container">
+		{% block checkmarkers %}{% endblock %}
+		{% block dropdownlist %}{% endblock %}
+		{% block container %}{% endblock %}
+	</div>
+ 
+
+
+	<!-- FOOT -->
+	<div class="navbar navbar-default navbar-fixed-bottom">
+		<div class="container">
+			<p class="navbar-text pull-left">Site Build by Rodney Rick, Prof. Dr. Renato Sato e Prof. Dr. Vinícius Melo</p>
+			<a class="navbar-btn btn pull-right btn-social-icon btn-sm btn-facebook"><i class="fa fa-facebook"></i></a>
+			<a class="navbar-btn btn pull-right btn-social-icon btn-sm btn-google-plus"><i class="fa fa-google-plus"></i></a>
+		</div>
+		
+	</div>
+
+	<script src="/static/js/region-analysis.js"></script>
+
+
+</body>
+</html>

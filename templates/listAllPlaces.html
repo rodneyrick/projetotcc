@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block tableMoreInputs %}
+
+<table id="moreFieldsTable" class="table table-striped">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Fields</th>
+			{% for i in regions %}
+				<th>{{i}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for k, v in table.items %}
+		<tr>
+			{% if k == 'price_by_meter' %}
+			<td><input type="checkbox" name="check1" value="{{k}}" checked disabled="disabled" /></td>
+			{% else %}
+			<td><input type="checkbox" name="check1" value="{{k}}"></td>
+			{% endif %}
+			<td>{{ k }}</td>
+			{% for i in v %}
+				<td>{{ i }}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+		<tr>
+			<td><input type="checkbox" name="check"></td>
+			<td><input style="width:180px" type="text" name="name" /></td>
+			<td><input style="width:70px" type="text" name="centro"/></td>
+			<td><input style="width:70px" type="text" name="leste"/></td>
+			<td><input style="width:70px" type="text" name="norte"/></td>
+			<td><input style="width:70px" type="text" name="oeste"/></td>
+			<td><input style="width:70px" type="text" name="sudeste"/></td>
+			<td><input style="width:70px" type="text" name="sul"/></td>
+			<td><a class="deleteRow"></a></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr><td colspan="3" style="text-align: right;"><input type="button" id="addrow" value="Add Row" /></td></tr>
+	</tfoot>
+</table>
+
+{% endblock %}
+
+{% block container %}
+
+<div class="container">
+	<h3>Lists of Places's Prices</h3>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Bairro</th>
+				<th>R$/m<sup>2</sup></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for local, value in places %}
+			<tr>
+				<td>{{ local }}</td>
+				<td>{{ value }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}

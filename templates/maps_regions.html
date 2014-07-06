@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+
+{% block tableMoreInputs %}
+
+<table id="moreFieldsTable" class="table table-striped">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Fields</th>
+			{% for i in regions %}
+				<th>{{i}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for k, v in table.items %}
+		<tr>
+			{% if k == 'price_by_meter' %}
+			<td><input type="checkbox" name="check1" value="{{k}}" checked disabled="disabled" /></td>
+			{% else %}
+			<td><input type="checkbox" name="check1" value="{{k}}"></td>
+			{% endif %}
+			<td>{{ k }}</td>
+			{% for i in v %}
+				<td>{{ i }}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+		<tr>
+			<td><input type="checkbox" name="check"></td>
+			<td><input style="width:180px" type="text" name="name" /></td>
+			<td><input style="width:70px" type="text" name="centro"/></td>
+			<td><input style="width:70px" type="text" name="leste"/></td>
+			<td><input style="width:70px" type="text" name="norte"/></td>
+			<td><input style="width:70px" type="text" name="oeste"/></td>
+			<td><input style="width:70px" type="text" name="sudeste"/></td>
+			<td><input style="width:70px" type="text" name="sul"/></td>
+			<td><a class="deleteRow"></a></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr><td colspan="3" style="text-align: right;"><input type="button" id="addrow" value="Add Row" /></td></tr>
+	</tfoot>
+</table>
+
+{% endblock %}
+
+{% block checkmarkers %}
+
+<div class="table map-checkmarkers">	
+	<table class="table map-table">
+		<thead><tr><th>Region</th></tr></thead>
+		<tbody>
+			{% for key, value in macro_regions.items %}
+				<tr>
+					<td>
+						<!-- Button trigger modal -->
+						<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#region{{key}}">
+						{{key}}
+						</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<br>
+	<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_dic_colors">CIDs</button>
+	<br>
+	<input type="checkbox" value="yes" onclick="togglePoints()" checked > Enable Points
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal_dic_colors" tabindex="-1" role="dialog" aria-labelledby="{{key}}" aria-hidden="true">
+  	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+				<h4 class="modal-title" id="cids">CIDs</h4>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Code</th>
+							<!-- <th>Quantity</th> -->
+							<th>Color</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for cid, color in dicColors.items %}
+						<tr>
+							<td>{{ cid }}</td>
+							<td align="center"><div style="width:10px; padding:10px; border:1px solid black; background-color:{{ color }};"></div></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+		
+
+{% for key, value in macro_regions.items %}
+<!-- Modal -->
+<div class="modal fade" id="region{{key}}" tabindex="-1" role="dialog" aria-labelledby="{{key}}" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+		<h4 class="modal-title" id="{{key}}">{{key}}</h4>
+	  </div>
+	  <div class="modal-body">
+		<table class="table">
+			<thead><tr><th>Region</th><th>Distance (km)</th></tr></thead>
+			<tbody>
+			{% for k,v in value.items %}
+				{% if k in permission %}
+				<tr>
+					<td style="text-align: left;">{{k}}</td>
+					<td style="text-align: center;">{{v|floatformat:1}}</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+			</tbody>
+		</table>
+
+		<table class="table">
+			<thead><tr><th>Field</th><th>Quantity</th></tr></thead>
+			<tbody>
+			{% for k,v in value.items %}
+				{% if k not in permission %}
+				<tr>
+					<td style="text-align: left;">{{k}}</td>
+					<td style="text-align: center;">{{v}}</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+			</tbody>
+		</table>
+
+	  </div>
+	</div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+
+{% block container %}
+
+<h2>
+	<span class="label label-primary">{{expression}}</span>
+</h2>
+
+<script type="text/javascript">
+
+var map;
+var infoWindow;
+
+var djangoLocations = {{localizations}} ;
+var markers = [];
+
+function setMarkers(map, locations){
+
+	for (var i = 0; i < locations.length; i++) {
+		var item = locations[i];
+		var myLatLng = new google.maps.LatLng(item[1], item[2]);
+		markers.push(
+			new google.maps.Marker({
+				position: myLatLng,
+				map: map,
+				flat: true,
+				icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					scale: 5,
+					strokeColor: item[3],
+					strokeOpacity: 1,
+					strokeWeight: 1,
+					fillColor: item[3],
+					fillOpacity: 0.35,
+					strokeColor: item[3]
+				},
+				// shape: shape,
+				title: item[0],
+				label: '<i class="glyphicon glyphicon-map-marker"></i>',
+				zIndex: google.maps.Marker.MAX_ZINDEX + 1
+			})
+		);
+	}
+}
+
+function unsetMarkers(item) {
+	item.forEach(function(e){
+		e.setMap(null);
+	});
+}
+
+function resetMarkers(item) {
+	item.forEach(function(e){
+		e.setMap(map);
+	});
+}
+
+var setTogglePointsMarkers = true;
+function togglePoints() {
+	if(setTogglePointsMarkers) {
+		setTogglePointsMarkers = false;
+		unsetMarkers(markers);
+	} else {
+		setTogglePointsMarkers = true;
+		resetMarkers(markers);
+	}
+}
+
+function textShow(event){
+	var contentString = '<b>'+ this.title +'</b>';
+	// Replace the info window's content and position.
+	infoWindow.setContent(contentString);
+	infoWindow.setPosition(event.latLng);
+	infoWindow.open(map);
+}
+
+function textOut(event){
+	this.setAnimation(null);
+	infoWindow.close(map);
+}
+
+function regions(map){
+	var leste = [new google.maps.LatLng(-23.170,-45.877),new google.maps.LatLng(-23.190,-45.864),new google.maps.LatLng(-23.190,-45.855),new google.maps.LatLng(-23.195,-45.851),new google.maps.LatLng(-23.214,-45.835),new google.maps.LatLng(-23.218,-45.827),new google.maps.LatLng(-23.231,-45.818),new google.maps.LatLng(-23.241,-45.807),new google.maps.LatLng(-23.253,-45.804),new google.maps.LatLng(-23.231,-45.786),new google.maps.LatLng(-23.216,-45.760),new google.maps.LatLng(-23.203,-45.745),new google.maps.LatLng(-23.188,-45.737),new google.maps.LatLng(-23.174,-45.735),new google.maps.LatLng(-23.157,-45.743),new google.maps.LatLng(-23.142,-45.753),new google.maps.LatLng(-23.127,-45.767),new google.maps.LatLng(-23.120,-45.775),new google.maps.LatLng(-23.108,-45.787),new google.maps.LatLng(-23.102,-45.798),new google.maps.LatLng(-23.099,-45.799),new google.maps.LatLng(-23.115,-45.835),new google.maps.LatLng(-23.141,-45.856),new google.maps.LatLng(-23.151,-45.879),new google.maps.LatLng(-23.154,-45.880),new google.maps.LatLng(-23.169,-45.878)];
+
+	// Construct the polygon.
+	lesteMap = new google.maps.Polygon({ paths: leste, strokeColor: '#FFFF00', strokeOpacity: 0.8, strokeWeight: 3, fillColor: '#FFFF00', fillOpacity: 0.35 });
+
+	lesteMap.setMap(map);
+
+	var markerLeste = new google.maps.Marker({
+		position:new google.maps.LatLng(-23.173038461538454, -45.80965384615385),
+		icon: { path: google.maps.SymbolPath.CIRCLE, strokeColor: '#FFFF00', fillColor: '#FFFF00', scale: 10, strokeWeight: 14 },
+		draggable: false,
+		title: 'Leste', 
+		map: map
+	});
+
+	// Add a listener for the click event.
+	google.maps.event.addListener(markerLeste, 'mouseover', textShow);
+	google.maps.event.addListener(markerLeste, 'mouseout', textOut);
+
+	var norte = [new google.maps.LatLng(-23.115,-45.835),new google.maps.LatLng(-23.141,-45.856),new google.maps.LatLng(-23.151,-45.879),new google.maps.LatLng(-23.154,-45.880),new google.maps.LatLng(-23.165,-45.878),new google.maps.LatLng(-23.173,-45.878),new google.maps.LatLng(-23.170,-45.878),new google.maps.LatLng(-23.177,-45.913),new google.maps.LatLng(-23.162,-45.923),new google.maps.LatLng(-23.163,-45.948),new google.maps.LatLng(-23.166,-45.955),new google.maps.LatLng(-23.174,-45.971),new google.maps.LatLng(-23.179,-45.972),new google.maps.LatLng(-23.183,-45.976),new google.maps.LatLng(-23.186,-45.983),new google.maps.LatLng(-23.191,-45.990),new google.maps.LatLng(-23.191,-46.000),new google.maps.LatLng(-23.190,-46.007),new google.maps.LatLng(-23.176,-46.007),new google.maps.LatLng(-23.168,-45.996),new google.maps.LatLng(-23.159,-45.981),new google.maps.LatLng(-23.151,-45.960),new google.maps.LatLng(-23.150,-45.932),new google.maps.LatLng(-23.135,-45.913),new google.maps.LatLng(-23.120,-45.904),new google.maps.LatLng(-23.102,-45.874),new google.maps.LatLng(-23.100,-45.858),new google.maps.LatLng(-23.088,-45.853),new google.maps.LatLng(-23.082,-45.844),new google.maps.LatLng(-23.081,-45.840),new google.maps.LatLng(-23.087,-45.814),new google.maps.LatLng(-23.095,-45.807),new google.maps.LatLng(-23.098,-45.798)];
+
+	// Construct the polygon.
+	norteMap = new google.maps.Polygon({ paths: norte, strokeColor: '#FF6600', strokeOpacity: 0.8, strokeWeight: 3, fillColor: '#FF6600', fillOpacity: 0.35 });
+
+	norteMap.setMap(map);
+
+	var markerNorte = new google.maps.Marker({
+		position: new google.maps.LatLng(-23.146151515151512 , -45.912212121212114),
+		icon: { path: google.maps.SymbolPath.CIRCLE, strokeColor: '#FF6600', fillColor: '#FF6600', scale: 10, strokeWeight: 14 },
+		draggable: false,
+		title: 'Norte', 
+		map: map
+	});
+
+	// Add a listener for the click event.
+	google.maps.event.addListener(markerNorte, 'mouseover', textShow);
+	google.maps.event.addListener(markerNorte, 'mouseout', textOut);
+
+	var centro = [ new google.maps.LatLng(-23.177,-45.914),new google.maps.LatLng(-23.170,-45.878),new google.maps.LatLng(-23.190,-45.864),new google.maps.LatLng(-23.197,-45.876),new google.maps.LatLng(-23.214,-45.895),new google.maps.LatLng(-23.215,-45.899),new google.maps.LatLng(-23.209,-45.915),new google.maps.LatLng(-23.199,-45.916),new google.maps.LatLng(-23.197,-45.918),new google.maps.LatLng(-23.198,-45.920),new google.maps.LatLng(-23.198,-45.922),new google.maps.LatLng(-23.203,-45.927),new google.maps.LatLng(-23.207,-45.934),new google.maps.LatLng(-23.210,-45.945),new google.maps.LatLng(-23.209,-45.945),new google.maps.LatLng(-23.200,-45.936),new google.maps.LatLng(-23.186,-45.922),new google.maps.LatLng(-23.177,-45.914),new google.maps.LatLng(-23.177,-45.913)];
+
+	// Construct the polygon.
+	centroMap = new google.maps.Polygon({ paths: centro, strokeColor: '#FF0000', strokeOpacity: 0.8, strokeWeight: 3, fillColor: '#FF0000', fillOpacity: 0.35 });
+
+	centroMap.setMap(map);
+
+	var markerCentro = new google.maps.Marker({
+		position: new google.maps.LatLng(-23.196473684210527 , -45.91331578947369),
+		icon: { path: google.maps.SymbolPath.CIRCLE, strokeColor: '#FF0000', fillColor: '#FF0000', scale: 10, strokeWeight: 14 },
+		draggable: false,
+		title: 'Centro', 
+		map: map
+	});
+
+	// Add a listener for the click event.
+	google.maps.event.addListener(markerCentro, 'mouseover', textShow);
+	google.maps.event.addListener(markerCentro, 'mouseout', textOut);
+	
+	var oeste = [new google.maps.LatLng(-23.191,-46.007),new google.maps.LatLng(-23.192,-45.990),new google.maps.LatLng(-23.186,-45.983),new google.maps.LatLng(-23.184,-45.976),new google.maps.LatLng(-23.179,-45.971),new google.maps.LatLng(-23.174,-45.971),new google.maps.LatLng(-23.163,-45.948),new google.maps.LatLng(-23.162,-45.923),new google.maps.LatLng(-23.177,-45.914),new google.maps.LatLng(-23.180,-45.917),new google.maps.LatLng(-23.209,-45.945),new google.maps.LatLng(-23.210,-45.945),new google.maps.LatLng(-23.209,-45.940),new google.maps.LatLng(-23.207,-45.934),new google.maps.LatLng(-23.203,-45.927),new google.maps.LatLng(-23.199,-45.922),new google.maps.LatLng(-23.198,-45.920),new google.maps.LatLng(-23.198,-45.917),new google.maps.LatLng(-23.199,-45.916),new google.maps.LatLng(-23.200,-45.916),new google.maps.LatLng(-23.203,-45.916),new google.maps.LatLng(-23.207,-45.915),new google.maps.LatLng(-23.209,-45.915),new google.maps.LatLng(-23.210,-45.913),new google.maps.LatLng(-23.211,-45.911),new google.maps.LatLng(-23.212,-45.908),new google.maps.LatLng(-23.213,-45.905),new google.maps.LatLng(-23.214,-45.902),new google.maps.LatLng(-23.215,-45.899),new google.maps.LatLng(-23.214,-45.896),new google.maps.LatLng(-23.215,-45.897),new google.maps.LatLng(-23.217,-45.898),new google.maps.LatLng(-23.258,-45.948),new google.maps.LatLng(-23.239,-45.968),new google.maps.LatLng(-23.235,-45.974),new google.maps.LatLng(-23.229,-45.979),new google.maps.LatLng(-23.224,-45.986)];
+
+	// Construct the polygon.
+	oesteMap = new google.maps.Polygon({ paths: oeste, strokeColor: '#0099FF', strokeOpacity: 0.8, strokeWeight: 3, fillColor: '#0099FF', fillOpacity: 0.35 });
+
+	oesteMap.setMap(map);
+
+	var markerOeste = new google.maps.Marker({
+		position: new google.maps.LatLng(-23.20391891891892 , -45.93545945945946),
+		icon: { path: google.maps.SymbolPath.CIRCLE, strokeColor: '#0099FF', fillColor: '#0099FF', scale: 10, strokeWeight: 14 },
+		draggable: false,
+		title: 'Oeste', 
+		map: map
+	});
+
+	// Add a listener for the click event.
+	google.maps.event.addListener(markerOeste, 'mouseover', textShow);
+	google.maps.event.addListener(markerOeste, 'mouseout', textOut);
+
+	var sul = [new google.maps.LatLng(-23.261,-45.949),new google.maps.LatLng(-23.261,-45.936),new google.maps.LatLng(-23.260,-45.927),new google.maps.LatLng(-23.262,-45.923),new google.maps.LatLng(-23.266,-45.919),new google.maps.LatLng(-23.272,-45.917),new google.maps.LatLng(-23.274,-45.916),new google.maps.LatLng(-23.282,-45.916),new google.maps.LatLng(-23.286,-45.916),new google.maps.LatLng(-23.293,-45.915),new google.maps.LatLng(-23.299,-45.915),new google.maps.LatLng(-23.309,-45.913),new google.maps.LatLng(-23.311,-45.910),new google.maps.LatLng(-23.313,-45.904),new google.maps.LatLng(-23.307,-45.898),new google.maps.LatLng(-23.302,-45.894),new google.maps.LatLng(-23.301,-45.889),new google.maps.LatLng(-23.298,-45.881),new google.maps.LatLng(-23.295,-45.877),new google.maps.LatLng(-23.289,-45.872),new google.maps.LatLng(-23.285,-45.864),new google.maps.LatLng(-23.278,-45.857),new google.maps.LatLng(-23.274,-45.848),new google.maps.LatLng(-23.270,-45.838),new google.maps.LatLng(-23.269,-45.833),new google.maps.LatLng(-23.266,-45.829),new google.maps.LatLng(-23.261,-45.833),new google.maps.LatLng(-23.256,-45.844),new google.maps.LatLng(-23.253,-45.856),new google.maps.LatLng(-23.248,-45.863),new google.maps.LatLng(-23.244,-45.868),new google.maps.LatLng(-23.238,-45.871),new google.maps.LatLng(-23.229,-45.875),new google.maps.LatLng(-23.225,-45.877),new google.maps.LatLng(-23.222,-45.880),new google.maps.LatLng(-23.215,-45.883),new google.maps.LatLng(-23.209,-45.885),new google.maps.LatLng(-23.215,-45.896),new google.maps.LatLng(-23.219,-45.901)];
+
+	// Construct the polygon.
+	sulMap = new google.maps.Polygon({ paths: sul, strokeColor: '#00FF00', strokeOpacity: 0.8, strokeWeight: 3, fillColor: '#00FF00', fillOpacity: 0.35 });
+	sulMap.setMap(map);
+
+	var markerSul = new google.maps.Marker({
+		position: new google.maps.LatLng(-23.26710256410257 , -45.8868717948718),
+		icon: { path: google.maps.SymbolPath.CIRCLE, strokeColor: '#00FF00', fillColor: '#00FF00', scale: 10, strokeWeight: 14 },
+		draggable: false,
+		title: 'Sul', 
+		map: map
+	});
+
+	// Add a listener for the click event.
+	google.maps.event.addListener(markerSul, 'mouseover', textShow);
+	google.maps.event.addListener(markerSul, 'mouseout', textOut);
+
+	var sudeste = [new google.maps.LatLng(-23.190,-45.864),new google.maps.LatLng(-23.191,-45.855),new google.maps.LatLng(-23.214,-45.835),new google.maps.LatLng(-23.218,-45.827),new google.maps.LatLng(-23.231,-45.818),new google.maps.LatLng(-23.241,-45.807),new google.maps.LatLng(-23.253,-45.804),new google.maps.LatLng(-23.257,-45.806),new google.maps.LatLng(-23.258,-45.808),new google.maps.LatLng(-23.261,-45.812),new google.maps.LatLng(-23.261,-45.812),new google.maps.LatLng(-23.263,-45.816),new google.maps.LatLng(-23.265,-45.822),new google.maps.LatLng(-23.266,-45.829),new google.maps.LatLng(-23.261,-45.833),new google.maps.LatLng(-23.256,-45.844),new google.maps.LatLng(-23.253,-45.856),new google.maps.LatLng(-23.244,-45.868),new google.maps.LatLng(-23.225,-45.877),new google.maps.LatLng(-23.222,-45.880),new google.maps.LatLng(-23.209,-45.885),new google.maps.LatLng(-23.215,-45.883),new google.maps.LatLng(-23.218,-45.882),new google.maps.LatLng(-23.219,-45.881),new google.maps.LatLng(-23.221,-45.881),new google.maps.LatLng(-23.207,-45.886),new google.maps.LatLng(-23.201,-45.880),new google.maps.LatLng(-23.197,-45.874)];
+
+	// Construct the polygon.
+	sudesteMap = new google.maps.Polygon({ paths: sudeste, strokeColor: '#CC33FF', strokeOpacity: 0.8, strokeWeight: 3, fillColor: '#CC33FF', fillOpacity: 0.35 });
+
+	sudesteMap.setMap(map);
+
+	var markerSudeste = new google.maps.Marker({
+		position: new google.maps.LatLng(-23.232750000000003 , -45.84732142857144),
+		icon: { path: google.maps.SymbolPath.CIRCLE, strokeColor: '#CC33FF', fillColor: '#CC33FF', scale: 10, strokeWeight: 14 },
+		draggable: false,
+		title: 'Sudeste', 
+		map: map
+	});
+
+	// Add a listener for the click event.
+	google.maps.event.addListener(markerSudeste, 'mouseover', textShow);
+	google.maps.event.addListener(markerSudeste, 'mouseout', textOut);
+}
+
+function initialize() {
+	var mapOptions = {
+		zoom: 12,
+		center: new google.maps.LatLng(-23.2062436,-45.900007),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	regions(map);
+	
+	setMarkers(map, djangoLocations);
+
+	infoWindow = new google.maps.InfoWindow();
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+	</script>
+
+<div id="map-canvas" class="map-canvas"></div>
+
+{% endblock %}

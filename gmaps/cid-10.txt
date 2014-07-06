@@ -1,0 +1,395 @@
+(C00-C14) - Neoplasia [tumores] malignas, lábio, cavidade oral e faringe
+(C00) - Neoplasia maligna do lábio
+(C01) - Neoplasia maligna da base da língua
+(C02) - Neoplasia maligna de outras partes e de partes não especificadas da língua
+(C03) - Neoplasia maligna da gengiva
+(C04) - Neoplasia maligna do assoalho da boca
+(C05) - Neoplasia maligna do palato
+(C06) - Neoplasia maligna de outras partes e de partes não especificadas da boca
+(C07) - Neoplasia maligna da glândula parótida
+(C08) - Neoplasia maligna de outras glândulas salivares maiores e as não especificadas
+(C09) - Neoplasia maligna de amígdala
+(C10) - Neoplasia maligna de orofaringe
+(C11) - Neoplasia maligna da nasofaringe
+(C12) - Neoplasia maligna do seio piriforme
+(C13) - Neoplasia maligna da hipofaringe
+(C14) - Neoplasia maligna de outras localizações e de localizações mal definidas, do lábio, cavidade oral e faringe
+(C15-C26) - Neoplasia malignas, Órgãos Digestivos
+(C15) - Neoplasia maligna do esôfago
+(C16) - Neoplasia maligna do estômago
+(C16.0) - Cárdia
+(C16.1) - Fundo do estômago
+(C16.2) - Corpo do estômago
+(C16.3) - Atro pilórico
+(C16.4) - Piloro
+(C16.5) - Pequenas curvatura do estômago, não especificada
+(C16.6) - Grande Curvatura do estômago, não especificada
+(C16.8) - Lesão invasiva do estômago
+(C16.9) - Estômago, não especificado
+(C17) - Neoplasia maligna do intestino delgado
+(C17.0) - Duodeno
+(C17.1) - Jejuno
+(C17.2) - Íleo
+(C17.3) - Divertículo de Meckel
+(C17.8) - Lesão invasiva do intestino delgado
+(C17.9) - Intestino delgado, não especificado
+(C18) - Neoplasia maligna do cólon
+(C19) - Neoplasia maligna da junção retossigmóide
+(C20) - Neoplasia maligna do reto
+(C21) - Neoplasia maligna do ânus e do canal anal
+(C22) - Neoplasia maligna do fígado e das vias biliares intra-hepáticas
+(C22.0) - Carcinoma de célula hepáticas
+(C22.1) - Carcinoma de vias biliares intra hepáticas
+(C22.2) - Hepatoblastoma
+(C22.3) - Angiossarcoma do fígado
+(C22.4) - Outros sarcomas do fígado
+(C22.7) - Outros carcinomas especificados do fígado
+(C22.9) - Neoplasia maligna do fígado , nao especificada
+(C23) - Neoplasia maligna da vesícula biliar
+(C24) - Neoplasia maligna de outras partes, e de partes não especificadas das vias biliares
+(C25) - Neoplasia maligna do pâncreas
+(C25.0) - Cabeça do pâncreas
+(C25.1) - Corpo do pâncreas
+(C25.2) - Cauda do pâncreas
+(C25.3) - Canal pancreático
+(C25.4) - Pâncreas endócrino
+(C25.7) - Outras partes do pâncreas
+(C25.8) - Lesão invasiva do pâncreas
+(C25.9) - Pâncreas, não especificado
+(C26) - Neoplasia malignas de outros órgãoes digestivos e de localizações mal definidas no aparelho digestivo
+(C30-C39) - Neoplasias [tumores] malignas(os) do aparelho respiratório e dos órgãos intratorácicos
+(C30) - Neoplasia maligna da cavidade nasal e do ouvido médio
+(C31) - Neoplasia maligna dos seios da face
+(C32) - Neoplasia maligna da laringe
+(C33) - Neoplasia maligna da traquéia
+(C34) - Neoplasia maligna dos brônquios e dos pulmões
+(C34.0) - Neoplasia maligna do brônquio principal
+(C34.1) - Neoplasia maligna do lobo superior, brônquio ou pulmão
+Tumor de Pancoast
+(C34.2) - Neoplasia maligna do lobo médio, brônquio ou pulmão
+(C34.3) - Neoplasia maligna do lobo inferior, brônquio ou pulmão
+(C34.8) - Neoplasia maligna dos brônquios e dos pulmões com lesão invasiva
+(C37) - Neoplasia maligna do timo
+(C38) - Neoplasia maligna do coração, mediastino e pleura
+(C39) - Neoplasia maligna de outras localizações e de localizações mal definidas do aparelho respiratório e dos órgãos intratorácicos
+(C40-C41) - Neoplasias [tumores] malignas(os) dos ossos e das cartilagens articulares
+(C40) - Neoplasia maligna dos ossos e cartilagens articulares dos membros
+(C41) - Neoplasia maligna dos ossos e das cartilagens articulares de outras localizações e de localizações não especificadas
+(C43-C44) - Melanoma e outras(os) neoplasias [tumores] malignas(os) da pele
+(C43) - Melanoma maligno da pele
+(C44) - Outras neoplasias malignas da pele
+(C45-C49) - Neoplasias [tumores] malignas(os) do tecido mesotelial e tecidos moles
+(C45) - Mesotelioma
+(C46) - Sarcoma de Kaposi
+(C47) - Neoplasia maligna dos nervos periféricos e do sistema nervoso autônomo
+(C48) - Neoplasia maligna dos tecidos moles do retroperitônio e do peritônio
+(C49) - Neoplasia maligna do tecido conjuntivo e de outros tecidos moles
+(C50) - Neoplasias [tumores] malignas(os) da mama
+(C50) - Neoplasia maligna da mama
+(C50.0) - Neoplasia maligna do mamilo e aréola
+(C50.1) - Neoplasia maligna da porção central da mama
+(C50.2) - Neoplasia maligna do quadrante superior interno da mama
+(C50.3) - Neoplasia maligna do quadrante inferior interno da mama
+(C50.4) - Neoplasia maligna do quadrante superior externo da mama
+(C50.5) - Neoplasia maligna do quadrante inferior externo da mama
+(C50.6) - Neoplasia maligna da porção axilar da mama
+(C50.8) - Neoplasia maligna da mama com lesão invasiva
+(C50.9) - Neoplasia maligna da mama, não especificada
+(C51-C58) - Neoplasias [tumores] malignas(os) dos órgãos genitais femininos
+(C51) - Neoplasia maligna da vulva
+(C52) - Neoplasia maligna da vagina
+(C53) - Neoplasia maligna do colo do útero
+(C54) - Neoplasia maligna do corpo do útero
+(C54.1) - Neoplasia maligna do endométrio
+(C55) - Neoplasia maligna do útero, porção não especificada
+(C56) - Neoplasia maligna do ovário
+(C57) - Neoplasia maligna de outros órgãos genitais femininos e dos não especificados
+(C58) - Neoplasia maligna da placenta
+Coriocarcinoma SOE
+Corioepitelioma SOE
+(C60-C63) - Neoplasias [tumores] malignas(os) dos órgãos genitais masculinos
+(C60) - Neoplasia maligna do pênis
+(C61) - Neoplasia maligna da próstata
+(C62) - Neoplasia maligna dos testículos
+(C63) - Neoplasia maligna de outros órgãos genitais masculinos e dos não especificados
+(C64-C68) - Neoplasias [tumores] malignas(os) do trato urinário
+(C64) - Neoplasia maligna do rim, exceto pelve renal
+(C65) - Neoplasia maligna da pelve renal
+(C66) - Neoplasia maligna dos ureteres
+(C67) - Neoplasia maligna da bexiga
+(C68) - Neoplasia maligna de outros órgãos urinários e dos não especificados
+(C69-C72) - Neoplasias [tumores] malignas(os) dos olhos, do encéfalo e de outras partes do sistema nervoso central
+(C69) - Neoplasia maligna do olho e anexos
+(C69.0) - Neoplasia maligna da conjuntiva
+(C69.1) - Neoplasia maligna da córnea
+(C69.2) - Neoplasia maligna da retina
+(C69.3) - Neoplasia maligna da coróide
+(C69.4) - Neoplasia maligna do corpo ciliar
+(C69.5) - Neoplasia maligna da glândula e canal lacrimal
+(C69.6) - Neoplasia maligna da órbita
+(C69.7) - Neoplasia maligna do olho e anexos com lesão invasiva
+(C70) - Neoplasia maligna das meninges
+(C70.0) - Neoplasia maligna das meninges cerebrais
+(C70.1) - Neoplasia maligna das meninges espinhais
+(C71) - Neoplasia maligna do encéfalo
+(C71.0) - Neoplasia maligna do cérebro, exceto lobos e ventrículos
+(C71.1) - Neoplasia maligna do lobo frontal
+(C71.2) - Neoplasia maligna do lobo temporal
+(C71.3) - Neoplasia maligna do lobo parietal
+(C71.4) - Neoplasia maligna do lobo occipital
+(C71.5) - Neoplasia maligna do ventrículo cerebral
+(C71.6) - Neoplasia maligna do cerebelo
+(C71.7) - Neoplasia maligna do tronco cerebral
+(C71.8) - Neoplasia maligna do encéfalo com lesão invasiva
+(C71.9) - Neoplasia maligna do encéfalo, não especificado
+(C72) - Neoplasia maligna da medula espinhal, dos nervos cranianos e de outras partes do sistema nervoso central
+(C72.0) - Neoplasia maligna da medula espinhal
+(C72.1) - Neoplasia maligna da cauda eqüina
+(C72.2) - Neoplasia maligna do nervo olfativo
+(C72.3) - Neoplasia maligna do nervo óptico
+(C72.4) - Neoplasia maligna do nervo acústico
+(C72.5) - Neoplasia maligna de outros nervos cranianos e os não especificados
+(C72.8) - Overlapping Neoplasia maligna do encéfalo e de outras partes do sistema nervoso central com lesão invasiva
+(C72.9) - Neoplasia maligna do sistema nervoso central, não especificado
+(C73-C75) - Neoplasias [tumores] malignas(os) da tireóide e de outras glândulas endócrinas
+(C73) - Neoplasia maligna da glândula tireóide
+(C74) - Neoplasia maligna da glândula supra-renal [Glândula adrenal]
+(C74.0) - Neoplasia maligna do córtex da supra-renal
+(C74.1) - Neoplasia maligna da medula da supra-renal
+(C74.9) - Neoplasia maligna da glândula supra-renal, não especificada
+(C75) - Neoplasia maligna de outras glândulas endócrinas e de estruturas relacionadas
+(C76-C80) - Neoplasias [tumores] malignas(os) de localizações mal definidas, secundárias e de localizações não especificadas
+(C76) - Neoplasia maligna de outras localizações e de localizações mal definidas
+(C76.0) - Neoplasia maligna da cabeça, face e pescoço
+(C76.1) - Neoplasia maligna do tórax
+(C76.2) - Neoplasia maligna do abdome
+(C76.3) - Neoplasia maligna da pelve
+(C77) - Neoplasia maligna secundária e não especificada dos gânglios linfáticos
+(C78) - Neoplasia maligna secundária dos órgãos respiratórios e digestivos
+(C79) - Neoplasia maligna secundária de outras localizações
+(C80) - Neoplasia maligna, sem especificação de localização
+(C81-C96) - Neoplasias [tumores] malignas(os), declaradas ou presumidas como primárias, dos tecidos linfático, hematopoético e tecidos correlatos
+(C81) - Doença de Hodgkin
+(C81.0) - Doença de Hodgkin, predominância linfocítica
+(C81.1) - Doença de Hodgkin, esclerose nodular
+(C81.2) - Doença de Hodgkin, celularidade mista
+(C81.3) - Doença de Hodgkin, depleção linfocítica
+(C82) - Linfoma não-Hodgkin, folicular (nodular)
+(C82.0) - Linfoma não-Hodgkin, pequenas células clivadas, folicular
+(C82.1) - Linfoma não-Hodgkin, misto, de pequenas e grandes células clivadas, folicular
+(C82.2) - Linfoma não-Hodgkin, grandes células, folicular
+(C83) - Linfoma não-Hodgkin difuso
+(C83.0) - Linfoma não-Hodgkin difuso, pequenas células (difuso)
+(C83.1) - Linfoma não-Hodgkin difuso, pequenas células clivadas (difuso)
+(C83.2) - Linfoma não-Hodgkin difuso, misto, de pequenas e grandes células (difuso)
+(C83.3) - Linfoma não-Hodgkin difuso, grandes células (difuso)
+(C83.4) - Linfoma não-Hodgkin difuso, imunoblástico (difuso)
+(C83.5) - Linfoma não-Hodgkin difuso, linfoblástico (difuso)
+(C83.6) - Linfoma não-Hodgkin difuso, indiferenciado (difuso)
+(C83.7) - Tumor de Burkitt
+(C84) - Linfomas de células T cutâneas e periféricas
+(C84.0) - Micose fungóide
+(C84.1) - Doença de Sézary
+(C84.2) - Linfoma da zona T
+(C84.3) - Linfoma linfoepitelióide
+(C84.4) - Linfoma de células T, periférico
+(C85) - Linfoma não-Hodgkin de outros tipos e de tipo não especificado
+(C85.0) - Linfossarcoma
+(C85.1) - Linfoma de células B, não especificado
+(C88) - Doenças imunoproliferativas malignas
+(C88.0) - Macroglobulinemia de Waldenström
+(C88.1) - Doença de cadeia pesada alfa
+(C88.2) - Doença de cadeia pesada gama
+(C88.3) - Doença imunoproliferativa do intestino delgado
+(C90) - Mieloma múltiplo e neoplasias malignas de plasmócitos
+(C90.0) - Mieloma múltiplo
+(C90.1) - Leucemia plasmocitária
+(C90.2) - Plasmocitoma extramedular
+(C91) - Leucemia linfóide
+(C91.0) - Leucemia linfoblástica aguda
+(C91.1) - Leucemia linfocítica crônica
+(C91.4) - Leucemia de células pilosas
+(C92) - Leucemia mielóide
+(C92.0) - Leucemia mielóide aguda
+(C92.1) - Leucemia mielóide crônica
+(C92.2) - Leucemia mielóide subaguda
+(C92.3) - Sarcoma mielóide
+Cloroma
+Sarcoma granulocítico
+(C92.4) - Leucemia pró-mielocítica aguda
+(C92.5) - Leucemia mielomonocítica aguda
+(C93) - Leucemia monocítica
+(C93.0) - Leucemia monocítica aguda
+(C93.1) - Leucemia monocítica crônica
+(C93.2) - Leucemia monocítica subaguda
+(C94) - Outras leucemias de células de tipo especificado
+(C94.0) - Eritremia e eritroleucemia agudas
+Doença de Di Guglielmo
+(C94.1) - Eritremia crônica
+(C94.2) - Leucemia megacarioblástica aguda
+(C94.3) - Leucemia de mastócitos
+(C94.4) - Panmielose aguda
+(C94.5) - Mielofibrose aguda
+(C94.7) - Outras leucemias especificadas
+(C95) - Leucemia de tipo celular não especificado
+(C95.0) - Leucemia aguda de tipo celular não especificado
+(C95.1) - Leucemia crônica de tipo celular não especificado
+(C95.2) - Leucemia subaguda de tipo celular não especificado
+(C95.7) - Outras leucemias de tipo celular não especificado
+(C95.9) - Leucemia não especificada
+(C96) - Outras neoplasias malignas e as não especificadas dos tecidos linfático, hematopoético e tecidos correlatos
+(C96.0) - Doença de Letterer-Siwe
+(C96.1) - Histiocitose maligna
+(C96.2) - Tumor maligno de mastócitos
+(C96.3) - Linfoma histiocítico verdadeiro
+(C96.7) - Outras neoplasias malignas especificadas dos tecidos linfático, hematopoético e tecidos correlatos
+(C96.9) - Neoplasia maligna dos tecidos linfático, hematopoético e tecidos correlatos, não especificada
+(C97) - Neoplasias [tumores] malignas(os) de localizações múltiplas independentes (primárias)
+(C97) - Neoplasias malignas de localizações múltiplas independentes (primárias)
+(D00-D09) - Neoplasias [tumores] in situ
+(D00) - Carcinoma in situ da cavidade oral, do esôfago e do estômago
+(D01) - Carcinoma in situ de outros órgãos digestivos
+(D02) - Carcinoma in situ do ouvido médio e do aparelho respiratório
+(D03) - Melanoma in situ
+(D04) - Carcinoma in situ da pele
+(D05) - Carcinoma in situ da mama
+(D06) - Carcinoma in situ do colo do útero (cérvix)
+(D07) - Carcinoma in situ de outros órgãos genitais e dos não especificados
+(D09) - Carcinoma in situ de outras localizações e das não especificadas
+(D10-D36) - Neoplasias [tumores] benignas(os)
+(D10) - Neoplasia benigna da boca e da faringe
+(D11) - Neoplasia benigna de glândulas salivares maiores
+(D11.0) - Neoplasia benigna da glândula parótida
+(D11.7) - Neoplasia benigna de outras glândulas salivares maiores
+sublingual
+submandibular
+(D11.9) - Neoplasia benigna da glândula salivar maior, não especificada
+(D12) - Neoplasia benigna do cólon, reto, canal anal e ânus
+(D12.0) - Neoplasia benigna do ceco
+(D12.1) - Neoplasia benigna do apêndice (vermiforme)
+(D12.2) - Neoplasia benigna do cólon ascendente
+(D12.3) - Neoplasia benigna do cólon transverso
+(D12.4) - Neoplasia benigna do cólon descendente
+(D12.5) - Neoplasia benigna do cólon sigmóide
+(D12.6) - Neoplasia benigna do cólon, não especificada
+Adenomatose do cólon
+(D12.7) - Neoplasia benigna da junção retossigmóide
+(D12.8) - Neoplasia benigna do reto
+(D12.9) - Neoplasia benigna do canal anal e ânus
+(D13) - Neoplasia benigna de outras partes e de partes mal definidas do aparelho digestivo
+(D13.0) - Neoplasia benigna do esôfago
+(D13.1) - Neoplasia benigna do estômago
+(D13.2) - Neoplasia benigna do duodeno
+(D13.3) - Neoplasia benigna de outras partes e partes não especificadas do intestino delgado
+(D13.4) - Neoplasia benigna do fígado 
+(D13.5) - Neoplasia benigna das vias biliares extra-hepáticas
+(D13.6) - Neoplasia benigna do pâncreas
+(D13.7) - Neoplasia benigna do pâncreas endócrino
+Tumor das ilhotas
+Tumor das Ilhotas de Langerhans
+(D13.9) - Neoplasia benigna de localizações mal definidas do aparelho digestivo
+(D14) - Neoplasia benigna do ouvido médio e do aparelho respiratório
+(D15) - Neoplasia benigna de outros órgãos intratorácicos e dos não especificados
+(D15.0) - Neoplasia benigna do timo
+(D15.1) - Neoplasia benigna do coração
+(D15.2) - Neoplasia benigna do mediastino
+(D16) - Neoplasia benigna de osso e de cartilagem articular
+(D16.0) - Neoplasia benigna da omoplata [escápula] e ossos longos dos membros superiores
+(D16.1) - Neoplasia benigna dos ossos curtos dos membros superiores
+(D16.2) - Neoplasia benigna dos ossos longos dos membros inferiores
+(D16.3) - Neoplasia benigna dos ossos curtos dos membros inferiores
+(D16.4) - Neoplasia benigna dos ossos do crânio e da face
+(D16.5) - Neoplasia benigna do osso da mandíbula
+(D16.6) - Neoplasia benigna da coluna vertebral
+(D16.7) - Neoplasia benigna das costelas, do esterno e da clavícula
+(D16.8) - Neoplasia benigna dos ossos pélvicos, sacro e cóccix
+(D16.9) - Neoplasia benigna do osso e cartilagem articular, não especificado
+(D17) - Neoplasia lipomatosa benigna
+(D18) - Hemangioma e linfangioma de qualquer localização
+(D18.0) - Hemangioma de qualquer localização
+Angioma SOE
+(D18.1) - Linfangioma de qualquer localização
+(D19) - Neoplasia benigna de tecido mesotelial
+(D20) - Neoplasia benigna de tecido mole do retroperitônio e do peritônio
+(D21) - Outras neoplasias benignas do tecido conjuntivo e de outros tecidos moles
+(D22) - Nevos melanocíticos
+(D23) - Outras neoplasias benignas da pele
+(D24) - Neoplasia benigna da mama
+(D25) - Leiomioma do útero
+fibromioma do útero
+(D26) - Outras neoplasias benignas do útero
+(D27) - Neoplasia benigna do ovário
+(D28) - Neoplasia benigna de outros órgãos genitais femininos e de órgãos não especificados
+(D29) - Neoplasia benigna dos órgãos genitais masculinos
+(D30) - Neoplasia benigna dos órgãos urinários
+(D30.0) - Neoplasia benigna do rim
+(D30.1) - Neoplasia benigna da pelve renal
+(D30.2) - Neoplasia benigna do ureter
+(D30.3) - Neoplasia benigna da bexiga
+(D30.4) - Neoplasia benigna da uretra
+(D30.7) - Neoplasia benigna de outros órgãos urinários
+(D30.9) - Neoplasia benigna de órgão urinário, não especificado
+(D31) - Neoplasia benigna do olho e anexos
+(D32) - Neoplasia benigna das meninges
+(D33) - Neoplasia benigna do encéfalo e de outras partes do sistema nervoso central
+(D34) - Neoplasia benigna da glândula tireóide
+(D35) - Neoplasia benigna de outras glândulas endócrinas e das não especificadas
+(D35.0) - Neoplasia benigna da glândula supra-renal (adrenal)
+(D35.1) - Neoplasia benigna da glândula paratireóide
+(D35.2) - Neoplasia benigna da glândula hipófise (pituitária)
+(D35.3) - Neoplasia benigna do conduto craniofaríngeo
+(D35.4) - Neoplasia benigna da glândula pineal
+(D35.5) - Neoplasia benigna do corpo carotídeo
+(D35.6) - Neoplasia benigna dos corpos aórticos e outros paragânglios
+(D35.7) - Neoplasia benigna de outras glândulas endócrinas especificadas
+(D35.8) - Neoplasia benigna com comprometimento pluriglandular
+(D35.9) - Neoplasia benigna de glândula endócrina, não especificada
+(D36) - Neoplasia benigna de outras localizações e de localizações não especificadas
+(D37-D48) - Neoplasias [tumores] de comportamento incerto ou desconhecido
+(D37) - Neoplasia de comportamento incerto ou desconhecido da cavidade oral e dos órgãos digestivos
+(D38) - Neoplasia de comportamento incerto ou desconhecido do ouvido médio e dos órgãos respiratórios e intratorácicos
+(D39) - Neoplasia de comportamento incerto ou desconhecido dos órgãos genitais femininos
+(D39.0) - Neoplasia de comportamento incerto ou desconhecido do útero
+(D39.1) - Neoplasia de comportamento incerto ou desconhecido do ovário
+(D39.2) - Neoplasia de comportamento incerto ou desconhecido da placenta
+(D39.7) - Neoplasia de comportamento incerto ou desconhecido de outros órgãos genitais femininos
+(D39.9) - Neoplasia de comportamento incerto ou desconhecido de órgão genital feminino, não especificado
+(D40) - Neoplasia de comportamento incerto ou desconhecido dos órgãos genitais masculinos
+(D41) - Neoplasia de comportamento incerto ou desconhecido dos órgãos urinários
+(D42) - Neoplasia de comportamento incerto ou desconhecido das meninges
+(D43) - Neoplasia de comportamento incerto ou desconhecido do encéfalo e do sistema nervoso central
+(D44) - Neoplasia de comportamento incerto ou desconhecido das glândulas endócrinas
+(D44.0) - Neoplasia de comportamento incerto ou desconhecido da glândula tireóide
+(D44.1) - Neoplasia de comportamento incerto ou desconhecido da glândula supra-renal (adrenal)
+(D44.2) - Neoplasia de comportamento incerto ou desconhecido da glândula paratireóide
+(D44.3) - Neoplasia de comportamento incerto ou desconhecido da glândula hipófise (pituitária)
+(D44.4) - Neoplasia de comportamento incerto ou desconhecido do conduto craniofaríngeo
+(D44.5) - Neoplasia de comportamento incerto ou desconhecido da glândula pineal
+(D44.6) - Neoplasia de comportamento incerto ou desconhecido do corpo carotídeo
+(D44.7) - Neoplasia de comportamento incerto ou desconhecido dos corpos aórticos e outros paragânglios
+(D44.8) - Neoplasia de comportamento incerto ou desconhecido com comprometimento pluriglandular
+Adenomatose endócrina múltipla
+(D44.9) - Neoplasia de comportamento incerto ou desconhecido de glândula endócrina, não especificada
+(D45) - Policitemia vera
+(D46) - Síndromes mielodisplásicas
+(D47) - Outras neoplasias de comportamento incerto ou desconhecido dos tecidos linfático, hematopoético e tecidos correlatos
+(D47.0) - Tumores de comportamento incerto ou desconhecido de mastócitos e células histiocíticas
+Tumor de mastócitos SOE
+Mastocitoma SOE
+(D47.1) - Doença mieloproliferativa crônica
+Mielofibrose (com metaplasia mielóide)
+Doença mieloproliferativa, não especificada
+(D47.2) - Gamopatia monoclonal
+(D47.3) - Trombocitemia essencial (hemorrágica)
+(D47.7) - Outras neoplasias especificadas de comportamento incerto ou desconhecido dos tecidos linfático, hematopoético e tecidos relacionados
+(D47.9) - Neoplasia de comportamento incerto ou desconhecido dos tecidos linfático, hematopoético e tecidos correlatos, não especificada
+(D48) - Neoplasia de comportamento incerto ou desconhecido de outras localizações e de localizações não especificadas
+(D48.0) - Neoplasia de comportamento incerto ou desconhecido dos ossos e cartilagens articulares
+(D48.1) - Neoplasia de comportamento incerto ou desconhecido do tecido conjuntivo e outros tecidos moles
+(D48.2) - Neoplasia de comportamento incerto ou desconhecido dos nervos periféricos e do sistema nervoso periférico
+(D48.3) - Neoplasia de comportamento incerto ou desconhecido do retroperitônio
+(D48.4) - Neoplasia de comportamento incerto ou desconhecido do peritônio
+(D48.5) - Neoplasia de comportamento incerto ou desconhecido da pele
+(D48.6) - Neoplasia de comportamento incerto ou desconhecido da mama
+(D48.7) - Other specified sites
+(D48.9) - Neoplasia de comportamento incerto ou desconhecido sem outra especificação

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block tableMoreInputs %}
+
+<table id="moreFieldsTable" class="table table-striped">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Fields</th>
+			{% for i in regions %}
+				<th>{{i}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for k, v in table.items %}
+		<tr>
+			{% if k == 'price_by_meter' %}
+			<td><input type="checkbox" name="check1" value="{{k}}" checked disabled="disabled" /></td>
+			{% else %}
+			<td><input type="checkbox" name="check1" value="{{k}}"></td>
+			{% endif %}
+			<td>{{ k }}</td>
+			{% for i in v %}
+				<td>{{ i }}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+		<tr>
+			<td><input type="checkbox" name="check"></td>
+			<td><input style="width:180px" type="text" name="name" /></td>
+			<td><input style="width:70px" type="text" name="centro"/></td>
+			<td><input style="width:70px" type="text" name="leste"/></td>
+			<td><input style="width:70px" type="text" name="norte"/></td>
+			<td><input style="width:70px" type="text" name="oeste"/></td>
+			<td><input style="width:70px" type="text" name="sudeste"/></td>
+			<td><input style="width:70px" type="text" name="sul"/></td>
+			<td><a class="deleteRow"></a></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr><td colspan="3" style="text-align: right;"><input type="button" id="addrow" value="Add Row" /></td></tr>
+	</tfoot>
+</table>
+
+{% endblock %}
+
+{% block container %}
+<script>
+	var map;
+	function initialize() {
+		var myLatlng = new google.maps.LatLng(-23.2062436,-45.900007);
+		var mapOptions = {
+			zoom: 12,
+			center: myLatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			styles: [
+				{stylers: [{ visibility: 'simplified' }]},
+				{elementType: 'labels', stylers: [{ visibility: 'off' }]}
+			]
+		}
+		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+		var marker = new google.maps.Marker({
+			position: myLatlng,
+			map: map,
+			title: 'São José dos Campos'
+		});
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<div id="map-canvas" class="map-canvas-index"></div>
+
+<div id="alert_placeholder" style="position:absolute; margin-top:7%; margin-left:7%;"></div>
+
+<script type="text/javascript">
+
+	var message = '{{message}}';
+	if(message)
+	$( document ).ready(function() {
+		$('#alert_placeholder').html(
+			'<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>'
+		);
+		$('#alert_placeholder').draggable();
+	});
+
+
+	
+
+</script>
+
+{% endblock %}

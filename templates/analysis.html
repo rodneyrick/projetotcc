@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block tableMoreInputs %}
+
+<table id="moreFieldsTable" class="table table-striped">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Fields</th>
+			{% for i in regions %}
+				<th>{{i}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for k, v in table.items %}
+		<tr>
+			{% if k == 'price_by_meter' %}
+			<td><input type="checkbox" name="check1" value="{{k}}" checked disabled="disabled" /></td>
+			{% else %}
+			<td><input type="checkbox" name="check1" value="{{k}}"></td>
+			{% endif %}
+			<td>{{ k }}</td>
+			{% for i in v %}
+				<td>{{ i }}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+		<tr>
+			<td><input type="checkbox" name="check"></td>
+			<td><input style="width:180px" type="text" name="name" /></td>
+			<td><input style="width:70px" type="text" name="centro"/></td>
+			<td><input style="width:70px" type="text" name="leste"/></td>
+			<td><input style="width:70px" type="text" name="norte"/></td>
+			<td><input style="width:70px" type="text" name="oeste"/></td>
+			<td><input style="width:70px" type="text" name="sudeste"/></td>
+			<td><input style="width:70px" type="text" name="sul"/></td>
+			<td><a class="deleteRow"></a></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr><td colspan="3" style="text-align: right;"><input type="button" id="addrow" value="Add Row" /></td></tr>
+	</tfoot>
+</table>
+
+{% endblock %}
+
+{% block checkmarkers %}
+<!-- id="map-config" -->
+<div class="table map-checkmarkers">
+	<table cellpadding="5px">
+		<tr>
+			<td><label>Enable markers</label></td>
+			<td><input type="checkbox" value="yes" onclick="togglePoints()" checked ></td>
+		</tr>
+		<tr>
+			<td><label>Enable Centroids</label></td>
+			<td><input type="checkbox" value="yes" onclick="toggleCentroids()" checked ></td>
+		</tr>
+		<tr>
+			<td><label>Enable Hospitals</label></td>
+			<td><input type="checkbox" value="yes" onclick="toggleHospitals()" checked ></td>
+		</tr>
+	</table>
+
+	<table class="table map-table">
+		<thead><tr><th>Centroid</th><th>SSE</th></tr></thead>
+		<tbody>
+			{% for key, value in sse.items %}
+				<tr><td>{{forloop.counter}}</td><td>{{value|floatformat:1}} km</td>
+			{% endfor %}
+		</tbody>
+	</table>
+
+</div>
+{% endblock %}
+
+{% block container %}
+<script>
+
+	var map;
+	var djangoLocations = {{localizations}} ;
+	var djangoCentroids = {{centroids}};
+	var djangoHospitals = {{hospitals}};
+
+	var markers = [];
+	var cent = [];
+	var hospitalsPoints = [];
+
+	function initialize() {
+		var mapOptions = {
+			zoom: 12,
+			center: new google.maps.LatLng({{ center }}),
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			styles: [
+				{stylers: [{ visibility: 'simplified' }]},
+				{elementType: 'labels', stylers: [{ visibility: 'off' }]}
+			]
+		}
+		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+		setMarkers(map, djangoLocations, djangoCentroids, djangoHospitals);
+	}
+
+	function setMarkers(map, locations, centroids, hospitals) {
+
+		var icons = {{ colors }};
+
+		for (var i = 0; i < hospitals.length; i++) {
+			var item = hospitals[i];
+			var myLatLng = new google.maps.LatLng(item[1], item[2]);
+			hospitalsPoints.push(
+				new google.maps.Marker({
+					position: myLatLng,
+					map: map,
+					icon: {
+						path: SHEILD,
+						fillColor: item[3],
+						fillOpacity: 1,
+						strokeColor: '',
+						strokeWeight: 0,
+						scale: 0.15
+					},
+					// shape: shape,
+					title: item[0],
+					label: '<i class="glyphicon"></i>',
+					zIndex: google.maps.Marker.max_zindex + 1
+			}));
+		}
+
+		for (var i = 0; i < locations.length; i++) {
+			var item = locations[i];
+			var myLatLng = new google.maps.LatLng(item[1], item[2]);
+			markers.push(
+				new google.maps.Marker({
+					position: myLatLng,
+					map: map,
+					flat: true,
+					icon: {
+						path: google.maps.SymbolPath.CIRCLE,
+						scale: 5,
+						strokeColor: icons[item[3]],
+						strokeOpacity: 1,
+						strokeWeight: 1,
+						fillColor: icons[item[3]],
+						fillOpacity: 0.35,
+						strokeColor: icons[item[3]]
+					},
+					// shape: shape,
+					title: item[0],
+					label: '<i class="map-icon-parking"></i>',
+					zIndex: google.maps.Marker.MAX_ZINDEX + 1
+				})
+			);
+		}
+
+		for (var i = 0; i < centroids.length; i++) {
+			var item = centroids[i];
+			var myLatLng = new google.maps.LatLng(item[1], item[2]);
+			cent.push(
+				new google.maps.Marker({
+					position: myLatLng,
+					map: map,
+					icon: {
+						path: SQUARE_PIN,
+						fillColor: icons[item[3]],
+						fillOpacity: 1,
+						strokeColor: '',
+						strokeWeight: 0,
+						scale: 0.2
+					},
+					// shape: shape,
+					title: item[0],
+					label: '<i class="map-icon"></i>',
+					zIndex: google.maps.Marker.max_zindex + 1
+			}));
+		}
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+	function unsetMarkers(item) {
+		item.forEach(function(e){
+			e.setMap(null);
+		});
+	}
+
+	function resetMarkers(item) {
+		item.forEach(function(e){
+			e.setMap(map);
+		});
+	}
+
+	var setTogglePointsMarkers = true;
+	function togglePoints() {
+		if(setTogglePointsMarkers) {
+			setTogglePointsMarkers = false;
+			unsetMarkers(markers);
+		} else {
+			setTogglePointsMarkers = true;
+			resetMarkers(markers);
+		}
+	}
+
+	var setTogglePointsCentroids = true;
+	function toggleCentroids(){
+		if(setTogglePointsCentroids) {
+			setTogglePointsCentroids = false;
+			unsetMarkers(cent);
+		} else {
+			setTogglePointsCentroids = true;
+			resetMarkers(cent);
+		}
+	}
+
+	var setTogglePointsHospitals = true;
+	function toggleHospitals(){
+		if(setTogglePointsHospitals) {
+			setTogglePointsHospitals = false;
+			unsetMarkers(hospitalsPoints);
+		} else {
+			setTogglePointsHospitals = true;
+			resetMarkers(hospitalsPoints);
+		}
+	}
+
+</script>
+<div id="map-canvas" class="map-canvas"></div>
+
+{% endblock %}

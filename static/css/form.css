@@ -1,0 +1,53 @@
+.formSpan{
+
+}
+
+#quantity{
+	background-color: #FFFFFF;
+	border: 1px;
+}
+p{
+	text-align: left;
+}
+.btnForm {
+	width: auto;
+}
+
+textarea#ceps {
+	max-width: inherit;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+	background-image: url(bg.gif);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+
+.form-dialog{
+	background-color: rgb(255, 255, 0); 
+	text-align: center;
+	position: fixed; 
+	left: 10%;
+	/*margin: 0px auto;*/
+	top: 10%;
+	z-index: 500; 
+	box-shadow: gray -5px 5px 6px; 
+	border-top-left-radius: 7px; 
+	border-top-right-radius: 7px; 
+	border-bottom-right-radius: 7px; 
+	border-bottom-left-radius: 7px; 
+	display: none;
+
+	background-image: -webkit-gradient(
+		linear,
+		right top,
+		left bottom,
+		color-stop(0, #D7F6D1),
+		color-stop(0.72, #C9C975)
+	);
+	background-image: -o-linear-gradient(left bottom, #D7F6D1 0%, #C9C975 72%);
+	background-image: -moz-linear-gradient(left bottom, #D7F6D1 0%, #C9C975 72%);
+	background-image: -webkit-linear-gradient(left bottom, #D7F6D1 0%, #C9C975 72%);
+	background-image: -ms-linear-gradient(left bottom, #D7F6D1 0%, #C9C975 72%);
+	background-image: linear-gradient(to left bottom, #D7F6D1 0%, #C9C975 72%);
+}

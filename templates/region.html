@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block tableMoreInputs %}
+
+<table id="moreFieldsTable" class="table table-striped">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Fields</th>
+			{% for i in regions %}
+				<th>{{i}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for k, v in table.items %}
+		<tr>
+			{% if k == 'price_by_meter' %}
+			<td><input type="checkbox" name="check1" value="{{k}}" checked disabled="disabled" /></td>
+			{% else %}
+			<td><input type="checkbox" name="check1" value="{{k}}"></td>
+			{% endif %}
+			<td>{{ k }}</td>
+			{% for i in v %}
+				<td>{{ i }}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+		<tr>
+			<td><input type="checkbox" name="check"></td>
+			<td><input style="width:180px" type="text" name="name" /></td>
+			<td><input style="width:70px" type="text" name="centro"/></td>
+			<td><input style="width:70px" type="text" name="leste"/></td>
+			<td><input style="width:70px" type="text" name="norte"/></td>
+			<td><input style="width:70px" type="text" name="oeste"/></td>
+			<td><input style="width:70px" type="text" name="sudeste"/></td>
+			<td><input style="width:70px" type="text" name="sul"/></td>
+			<td><a class="deleteRow"></a></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr><td colspan="3" style="text-align: right;"><input type="button" id="addrow" value="Add Row" /></td></tr>
+	</tfoot>
+</table>
+
+{% endblock %}
+
+
+{% block dropdownlist %}
+<script type="text/javascript">
+$( document ).ready(function() {
+	$("#testOption").html($("#testOption option").sort(function (a, b) {return a.value == b.value ? 0 : a.value < b.value ? 1 : -1}));
+	$( "#testOption" ).change(function() {
+		$("#hColor").val($("#testOption").val());
+		$("#hPrice").val(
+			$("#testOption option[value='"
+				+ $("#testOption").val() 
+				+ "']"
+			).text().trim()
+		);
+		$("#hColor").val($("#testOption").val());
+	});
+});
+</script>
+
+<div class="map-dropdown">
+	<form action="/region" method="post">
+
+		<select class="form-control" id="testOption">
+			{% for c, v in colors %}
+			<option value="{{c}}" title="R$ {{v}}">
+				<div style="width:10px; padding:10px; border:1px solid black; background-color:{{c}};">{{v}}</div>
+			</option>
+			{% endfor %}
+		</select>
+		<input type='hidden' name='csrfmiddlewaretoken' value='{{csrf_token}}'>
+		<input type="hidden" id="hPrice" name="price">
+		<input type="hidden" id="hColor" name="color">
+		<input type="hidden" id="new_points" name="new_points" value="">
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary" value="Save?">
+		</div>
+	</form>
+	<div class="map-table pointsTable">
+		<table id="pointsTable" class="table">
+			<thead><tr><th>#</th><th>Lat.</th><th>Lng.</th></tr></thead>
+			<tbody></tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}
+
+{% block container %}
+<script>
+var map;
+var pointsInclude = [];
+
+function initialize() {
+	var mapOptions = {
+		zoom: 12,
+		center: new google.maps.LatLng({{center}})
+	};
+	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+	google.maps.event.addListener(map, 'click', function(e) {
+		placeMarker(e.latLng, map);
+	});
+}
+
+function placeMarker(position, map) {
+
+	var marker = new google.maps.Marker({
+		position: position,
+		map: map
+	});
+	
+	pointsInclude.push(
+		new google.maps.LatLng(
+			position.lat(), 
+			position.lng())
+	);
+
+	$('#pointsTable > tbody:last').
+		append(
+			'<tr>' + 
+				'<td><label>' + pointsInclude.length + '</label></td>' +
+				'<td>' + position.lat().toFixed(3) + '</td>' + 
+				'<td>' + position.lng().toFixed(3) + '</td>' +
+			'</tr>'
+		);
+
+	var full_list = '';
+	for(var i=0; i < pointsInclude.length; i++){
+		full_list += pointsInclude[i] + ';';
+	}
+	$('#new_points').val(full_list);
+
+	// Construct the polygon.
+	var p;
+	p = new google.maps.Polygon({
+		paths: pointsInclude,
+		strokeColor: '#FF0000',
+		strokeOpacity: 0.8,
+		strokeWeight: 3,
+		fillColor: '#FF0000',
+		fillOpacity: 0.1
+	});
+	p.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+
+<div id="map-canvas" class="map-canvas-new-points"></div>
+
+{% endblock %}
+
+

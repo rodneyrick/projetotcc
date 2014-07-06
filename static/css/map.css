@@ -1,0 +1,72 @@
+.map-canvas-index {
+	height: 86%;
+	width: 100%;
+	float: left;
+}
+
+.map-canvas {
+	margin-left: 2%;
+	height: 86%;
+	width: 85%;
+	float: left;
+}
+
+.map-canvas-block {
+	height: 400px;
+	width: 600px;
+}
+
+.map-checkmarkers {
+	float: left;
+}
+
+.map-dropdown{
+	float: left;
+	margin-right: 2%;
+}
+
+.map-filters{
+	float: left;
+}
+
+.map-new-points {
+	background-color: blue;
+	width: 100%;
+	float: left;	
+}
+.map-canvas-new-points {
+	height: 86%;
+	width: 84%;
+	float: right;
+}
+
+.map-table {
+	float: left;
+}
+
+.pointsTable{
+	max-height: 70%;
+    overflow-y: scroll;
+}
+
+.marker-label,
+.marker-icon {
+	z-index: 99;
+	position: absolute;
+	display: block;
+	margin-top: -50px;
+	margin-left: -25px;
+	width: 25px;
+	height: 25px;
+	font-size: 30px !important;
+	text-align: center;
+	color: #FFFFFF;
+	white-space: nowrap;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 200px;
+	height: 200px; 
+	/* width and height can be anything, as long as they're equal */
+}
