@@ -1,3 +1,7 @@
+######################################################
+# Funcoes que geram as cores necessários para o sistema
+######################################################
+
 # def random_color():
 # 	from random import choice
 # 	import string
@@ -22,6 +26,10 @@ def sinebow(h):
 	return (int(255*chan**2) for chan in (r, g, b))
 
 def nthcolor(n):
+	"""
+	Gera todas as cores sem repeticao
+	function(number) -> list
+	"""
 	l = []
 	phi = (1+5**0.5)/2
 	i = 0
@@ -33,6 +41,10 @@ def nthcolor(n):
 	return l
 
 def tohex(colorRGB):
+	"""
+	Retorna uma cor no formato RGB para Hexadecimal
+	function() -> list
+	"""
 	r = int(colorRGB[0])
 	g = int(colorRGB[1])
 	b = int(colorRGB[2])
@@ -51,6 +63,10 @@ colors = []
 phi = (1+5**0.5)/2
 # Retrieve a single page and report the url and contents
 def gen_color(i):
+	"""
+	Retorna uma cor que não está presente no sistema de busca
+	function(number) -> color
+	"""
 	c = list(sinebow(i * phi))
 	c = tohex(c)
 	test = True
@@ -63,6 +79,10 @@ def gen_color(i):
 
 import random 
 def parallel_gen_colors(num_colors):
+	"""
+	Gera, paralelamente, todas as sem repeticao
+	function(number) -> list
+	"""
 	import concurrent.futures
 	l = []
 	# We can use a with statement to ensure threads are cleaned up promptly

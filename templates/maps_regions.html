@@ -63,8 +63,12 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	<br>
+	<h3>Extras</h3>
 	<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_dic_colors">CIDs</button>
+	<br>
+	<br>
+	<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_r2_expression">R<sup>2</sup></button>
+	<br>
 	<br>
 	<input type="checkbox" value="yes" onclick="togglePoints()" checked > Enable Points
 </div>
@@ -146,14 +150,41 @@
 </div>
 {% endfor %}
 
+<style type="text/css">
+	.table td, .table th{text-align: center;}
+</style>
+
+<div class="modal fade" id="modal_r2_expression" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+		<h4 class="modal-title">R<sup>2</sup> and Expression</h4>
+	  </div>
+	  <div class="modal-body">
+		
+		<h3>R<sup>2</sup></h3>
+
+		<p class="lead">{{r2}}</p>
+
+		<h3>Expression</h3>
+		<p class="lead">{{expression}}</p>
+
+		<h3>Results</h3>
+		{{tableY}}
+
+		<h3>Description</h3>
+		{{tableDescription}}
+
+	  </div>
+	</div>
+  </div>
+</div>
+
 {% endblock %}
 
 
 {% block container %}
-
-<h2>
-	<span class="label label-primary">{{expression}}</span>
-</h2>
 
 <script type="text/javascript">
 

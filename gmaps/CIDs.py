@@ -2,6 +2,10 @@
 import MongoDB
 
 def CID(list_code):
+	"""
+	Importa da internet todos os CID necessarios
+	function()
+	"""
 	f = open('workfile.txt', 'w')
 	for c in list_code:
 		time.sleep(5)
@@ -23,6 +27,10 @@ def CID(list_code):
 # CID(cids)
 
 def createDataBaseCIDs():
+	"""
+	Cria a base de CIDs que serão utilizados
+	function()
+	"""
 	with open('cid-10.txt', 'r+') as f:
 		grouping = ''
 		for line in f.readlines():
@@ -45,6 +53,10 @@ def createDataBaseCIDs():
 	f.closed
 
 def randomCIDs(num_max_cids):
+	"""
+	Retorna uma lista de aleatoria de CIDs
+	function(number) -> list
+	"""
 	import random
 	listCIDs = MongoDB.list_all_cids()
 	list_analysis = []
@@ -57,4 +69,4 @@ def randomCIDs(num_max_cids):
 	# print(len(set(list_analysis)))
 	return list_analysis
 
-createDataBaseCIDs()
+# createDataBaseCIDs()

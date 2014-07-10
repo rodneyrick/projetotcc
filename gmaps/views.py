@@ -302,7 +302,7 @@ def maps_regions(request):
 		num_points = int(request.POST.get('num_points_regions'))
 		moreFields = request.POST.get('moreFields')
 		moreFields = json.loads(moreFields)
-		cabecalho, result, expression = viewLists.json2matrix(moreFields)
+		tableY, result, expression, r2, sqr, sqt, tableDescription = viewLists.json2matrix(moreFields)
 		dic, randomCIDs, dicColors = viewLists.randomCIDs(num_points)
 		
 
@@ -312,7 +312,10 @@ def maps_regions(request):
 				'regions' : regions,
 				'table': table,
 				'macro_regions': viewLists.getDataMacroRegion(),
+				'tableY': tableY,
 				'expression' : expression,
+				'r2' : r2,
+				'tableDescription': tableDescription,
 				'permission': ['Centro','Leste','Norte','Oeste','Sul','Sudeste'],
 				'localizations': randomCIDs,
 				'dicData': dic,
@@ -324,6 +327,7 @@ def maps_regions(request):
 		html = html.replace("&#39;", "'")
 		html = html.replace("&lt;", "<")
 		html = html.replace("&gt;", ">")
+		html = html.replace('&quot;', '"')
 		return HttpResponse(html)
 
 	points = []
